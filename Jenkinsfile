@@ -2,17 +2,19 @@ pipeline {
     agent any
     
     stages {
-        stage('Run Docker Compose') {
+        stage('Run HTTP Server') {
             steps {
                 script {
                     // Clone git submodule
                     sh 'git submodule update --init --recursive'
 
-                    // Run Docker Compose without sudo
-                    sh 'docker-compose -f index.html up -d --build'
+                    // Start a simple HTTP server
+                    sh 'python3 -m http.server 8000 &'
+
+                    // Sleep for a few seconds to allow the server to start
+                    sleep(time: 10, unit: 'SECONDS')
                 }
             }
         }  
     }
 }
-
