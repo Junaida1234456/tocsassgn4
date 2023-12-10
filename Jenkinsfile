@@ -9,7 +9,7 @@ pipeline {
                     sh 'git submodule update --init --recursive'
 
                     // Start a simple HTTP server
-                    sh 'python3 -m http.server 8001 &'
+                    sh 'python -m http.server 8001 &'
 
                     // Sleep for a few seconds to allow the server to start
                     sleep(time: 10, unit: 'SECONDS')
