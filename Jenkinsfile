@@ -12,7 +12,7 @@ pipeline {
                     sh 'python3 -m http.server 8001 &'
 
                     // Sleep for a few seconds to allow the server to start
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 60, unit: 'SECONDS')
                 }
             }
         }  
