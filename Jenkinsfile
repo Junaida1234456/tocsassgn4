@@ -9,7 +9,7 @@ pipeline {
                     sh 'git submodule update --init --recursive'
 
                     // Run Docker Compose without sudo
-                    sh 'docker-compose -f Jenkinsfile up -d --build'
+                    sh 'docker-compose -f index.html up -d --build'
                 }
             }
         }  
