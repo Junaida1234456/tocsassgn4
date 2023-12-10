@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     
@@ -5,16 +6,20 @@ pipeline {
         stage('Run HTTP Server') {
             steps {
                 script {
+                    // Stop existing HTTP server if it's running
+                    sh 'pkill -f "python3 -m http.server" || true'
+
                     // Clone git submodule
                     sh 'git submodule update --init --recursive'
 
                     // Start a simple HTTP server
-                    sh 'python3 -m http.server 8001 &'
+                    sh 'python3 -m http.server 2556 &'
 
                     // Sleep for a few seconds to allow the server to start
-                    sleep(time: 60, unit: 'SECONDS')
+                    sleep(time: 10, unit: 'SECONDS')
                 }
             }
         }  
     }
 }
+
