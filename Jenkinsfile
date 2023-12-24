@@ -1,29 +1,24 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'master', url: 'https://github.com/Junaida1234456/tocsassgn4'  // Replace with your repository URL
-            }
-        }
-
-        stage('Build Image') {
+        stage('Run HTTP Server') {
             steps {
                 script {
-                    dockerImage = docker.build("junaid345/spaceimage")  // Replace with your Docker Hub username and image name
-                }
-            }
-        }
+                    // Stop existing HTTP server if it's running
+                    sh 'pkill -f "python3 -m http.server" || true'
 
-        stage('Push Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        dockerImage.push()
-                    }
+                    // Clone git submodule
+                    sh 'git submodule update --init --recursive'
+
+                    // Start a simple HTTP server
+                    sh 'python3 -m http.server 2556 --bind 0.0.0.0 --cgi &'
+
+
+                    // Sleep for a few seconds to allow the server to start
+                    sleep(time: 10, unit: 'SECONDS')
                 }
             }
-        }
-    }
+        }  
+    }
 }
