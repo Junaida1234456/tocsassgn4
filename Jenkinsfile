@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
     stages {
         stage('Run HTTP Server') {
             steps {
@@ -19,6 +18,6 @@ pipeline {
                     sleep(time: 10, unit: 'SECONDS')
                 }
             }
-        }  
-    }
+        }  
+    }
 }
