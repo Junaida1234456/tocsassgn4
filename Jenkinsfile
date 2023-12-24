@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'spaceimage'  // Replace with your Docker image name
         GITHUB_REPO_URL = 'https://github.com/Junaida1234456/tocsassgn4'  // Replace with your GitHub repository URL
-        TARGET_PORT = '2556'
+        TARGET_PORT = '2555'
     }
 
     stages {
